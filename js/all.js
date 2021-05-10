@@ -188,7 +188,7 @@ function renderList(sourceData) {
 	data.forEach(item => {
 		let tickeTemplte = '';
 		if (item.Ticketinfo !== "") {
-			tickeTemplte = `<div><img src="./src/img/icons_tag.png" alt="">${item.Ticketinfo}</div>`;
+			tickeTemplte = `<div><img src="./img/icons_tag.png" alt="">${item.Ticketinfo}</div>`;
 		}
 		template += `<li class="card-item">
 				<a href="#" class="card-header" style="background-image: url('${item.Picture1}');">
@@ -197,16 +197,16 @@ function renderList(sourceData) {
 				</a>
 				<ul class="card-body">
 						<li>
-								<img src="./src/img/icons_clock.png" alt="">
+								<img src="./img/icons_clock.png" alt="">
 								<p>${item.Opentime}</p>
 						</li>
 						<li>
-								<img src="./src/img/icons_pin.png" alt="">
+								<img src="./img/icons_pin.png" alt="">
 								<p>${item.Add}</p>
 						</li>
 						<li>
 								<div>
-										<img src="./src/img/icons_phone.png" alt=""><a href="tel:${item.Tel}">${item.Tel}</a>
+										<img src="./img/icons_phone.png" alt=""><a href="tel:${item.Tel}">${item.Tel}</a>
 								</div>
 						</li>
 						<li>
