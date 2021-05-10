@@ -1,3 +1,4 @@
+@import '_reset';
 .wrap {
   height: 100wh;
   margin: 0 auto;
@@ -7,10 +8,9 @@
 
 .header {
   height: 400px;
-  background: url("../img/Hero.png") no-repeat center/cover;
+  background: url("../../img/Hero.png") no-repeat center/cover;
   display: flex;
   flex-direction: column;
-
   h1 {
     font-size: 2.8rem;
     color: #fff;
@@ -31,7 +31,7 @@
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
-      background: url("../img/icons_down.png") rgba(255, 255, 255, 0.7) no-repeat 97% center;
+      background: url("../../img/icons_down.png") rgba(255, 255, 255, 0.7) no-repeat 97% center;
     }
   }
 }
