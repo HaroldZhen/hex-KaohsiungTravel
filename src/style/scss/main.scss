@@ -192,6 +192,7 @@
       }
 
       .card-header {
+        position: relative;
         padding: 16px 24px;
         height: 180px;
         display: flex;
@@ -244,44 +245,59 @@
         }
       }
     }
+  }
+}
 
-    .pagination {
-      display: flex;
-      justify-content: center;
-      margin: 30px 0px;
-
-      a,span {
-        text-decoration: none;
-        color: #424242;
-        margin: 0 2px;
-        padding: 0px 3px;
-        border-radius: 10px;
-        transition: .2s;
-      }
-
-      a:hover {
-        color: #424242;
-        background-color: #559AC8;
-      }
-
-      a.active,span.active {
-        color: #559AC8;
-        background-color: transparent;
-        position: relative;
-      }
-
-      .unlink {
-        color: #bbbbbb;
-      }
-
-      @media (max-width: 700px) {
-        .link.hidden {
-          display: none;
-        }
-      }
+.page-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 40px;
+  a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    font-size: 15px;
+    cursor: pointer;
+    border: 1px solid rgba(85, 154, 200, 0.5);
+    background: rgba(255, 255, 255, 0.5);
+    color: #666;
+    transition: all 0.15s linear;
+    & + a {
+      border-left: 0;
+    }
+    &.active, &:hover {
+      color: #FFFFFF;
+      background: #559AC8;
+    }
+    &.off {
+      color: rgba(68, 68, 68, 0.4);
+      background: #EEEEEE;
+      border-color: rgba(68, 68, 68, 0.2);
+      cursor: default;
+    }
+    &:first-child {
+      width: 60px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 5px;
+    }
+    &:last-child {
+      width: 60px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 0;
     }
   }
 }
+
+
 
 .footer {
   margin-top: 30px;

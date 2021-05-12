@@ -4,7 +4,7 @@ const zoneDrop = document.getElementById('drop-down');
 const cardList = document.querySelector('.card-list');
 const hotSportList = document.getElementById('hot-sport-list');
 const zoneTitle = document.querySelector('.zone-title');
-const pageList = document.getElementById('page-list');
+const pageList = document.querySelector('.page-list');
 const goTopBtn = document.getElementById('goTop');
 // 定義資料
 let currentZipCode = 0;
@@ -88,22 +88,21 @@ function renderPagintaion(pageObject, currentPage) {
   const current = parseInt(currentPage, 10);
   let template = '';
   if (currentPage > 1) {
-    template += `<li class="link"><a href="#" data-page="${current - 1}" >Prev</a></li>`;
+    template += `<a class="prev" data-page="${current - 1}">prev</a>`;
   } else {
-    template += '<li class="link unlink"><span>Prev</span></li>';
+    template += `<a class="prev off" data-page="${current}">prev</a>`;
   }
   for (let i = 1; i <= pageObject.countPage; i += 1) {
-    const isHidden = current !== i ? 'hidden' : '';
     if (current === i) {
-      template += `<li class="link"><span class="active">${i}</span></li>`;
+      template += `<a class="active" data-page="${i}">${i}</a>`;
     } else {
-      template += `<li class="link ${isHidden}"><a href="#" data-page="${i}">${i}</a></li>`;
+      template += `<a data-page="${i}">${i}</a>`;
     }
   }
   if (pageObject.countPage > currentPage) {
-    template += `<li class="link"><a href="#" data-page="${current + 1}" >Next</a></li>`;
+    template += `<a class="next" data-page="${current + 1}">next</a>`;
   } else {
-    template += '<li class="link unlink"><span>Next</span></li>';
+    template += `<a class="next off" data-page="${current}">next</a>`;
   }
   pageList.innerHTML = template;
 }
@@ -120,7 +119,7 @@ function renderList(sourceData) {
     template += `<li class="card-item">
 				<a href="#" class="card-header" style="background-image: url('${item.Picture1}');">
 						<h4>${item.Name}</h4>
-						<p></p>
+						<p>${item.Zipame}</p>
 				</a>
 				<ul class="card-body">
 						<li>
@@ -129,7 +128,7 @@ function renderList(sourceData) {
 						</li>
 						<li>
 								<img src="./images/icons_pin.png" alt="">
-								<p>${item.Add}</p>
+                <a href="https://www.google.com.tw/maps/search/${item.Name}${item.Add}" target="_blank">${item.Add}</a>
 						</li>
 						<li>
 								<div>
