@@ -29,10 +29,10 @@ function countHotZone(zoneZip) {
   if (newIndex >= 0) {
     hotZone[newIndex].count += 1;
   } else {
-    const { name, zip: code } = zoneData.find((item) => item.zip === zoneZip);
+    const { name, zip } = zoneData.find((item) => item.zip === zoneZip);
     hotZone.unshift({
       name,
-      code,
+      zip,
       count: 1,
     });
   }
@@ -52,7 +52,10 @@ function pagination(sourceData, current = 1) {
   data = sourceData.slice(start, end);
   return {
     countPage,
+    currentPage,
     data,
+    hasPre: current > 1,
+    hasNext: current < countPage,
   };
 }
 
@@ -84,25 +87,29 @@ function renderDropdown(sourceData, zip) {
 }
 
 // 渲然分頁
-function renderPagintaion(pageObject, currentPage) {
-  const current = parseInt(currentPage, 10);
+function renderPagintaion({
+  hasPre = false,
+  hasNext = false,
+  currentPage = 0,
+  countPage = 0,
+} = {}) {
   let template = '';
-  if (currentPage > 1) {
-    template += `<a class="prev" data-page="${current - 1}">prev</a>`;
+  if (hasPre) {
+    template += `<a class="prev" data-page="${currentPage - 1}">Prev</a>`;
   } else {
-    template += `<a class="prev off" data-page="${current}">prev</a>`;
+    template += `<a class="prev off" data-page="${currentPage}">Prev</a>`;
   }
-  for (let i = 1; i <= pageObject.countPage; i += 1) {
-    if (current === i) {
+  for (let i = 1; i <= countPage; i += 1) {
+    if (currentPage === i) {
       template += `<a class="active" data-page="${i}">${i}</a>`;
     } else {
       template += `<a data-page="${i}">${i}</a>`;
     }
   }
-  if (pageObject.countPage > currentPage) {
-    template += `<a class="next" data-page="${current + 1}">next</a>`;
+  if (hasNext) {
+    template += `<a class="next" data-page="${currentPage + 1}">Next</a>`;
   } else {
-    template += `<a class="next off" data-page="${current}">next</a>`;
+    template += `<a class="next off" data-page="${currentPage}">Next</a>`;
   }
   pageList.innerHTML = template;
 }
@@ -160,10 +167,10 @@ function fadeInEffect() {
 function renderMain(soruceData, zip, currentPage = 1) {
   renderTitle(zip);
   renderDropdown(zoneData, zip);
-  let filterData = filterZone(soruceData, zip);
-  filterData = pagination(filterData, currentPage);
-  renderPagintaion(filterData, currentPage);
-  renderList(filterData);
+  const filterData = filterZone(soruceData, zip);
+  const pageData = pagination(filterData, currentPage);
+  renderPagintaion(pageData);
+  renderList(pageData);
   fadeInEffect();
 }
 
@@ -243,8 +250,7 @@ function getRemoteData() {
       renderHotSport(hotZone);
     })
     .catch((err) => {
-      // console.log('錯誤', err);
-      zoneTitle.innerHTML = 'err';
+      zoneTitle.innerHTML = err.toString();
     });
 }
 
